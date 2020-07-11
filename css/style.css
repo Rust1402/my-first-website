@@ -160,7 +160,7 @@
 
 .card{
     max-width: 1110px;
-    height: 1030px;
+    height: auto;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
