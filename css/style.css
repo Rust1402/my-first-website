@@ -236,19 +236,18 @@ footer{
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-around;
-    align-items:center;
-    max-width: 1105px;
-    height: auto;
-    text-align: center;
-    text-decoration-line:underline;
-    margin-top: 55px;
+    display: flex; 
 }
 
 .footer-content{
     display: flex;
-    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 1105px;
+    height: 156px;
+    text-align: center;
+    text-decoration-line: underline;
+    margin-top: 55px;
 }
 
 .footer-text,
@@ -333,6 +332,7 @@ footer{
    }
 
    .footer-content {
+      max-width: 970px;
       justify-content: space-around;
    }
 
@@ -633,6 +633,7 @@ footer{
    }
 
    .footer-content{
+      max-width: 630px;
       justify-content: center;
    }
 
