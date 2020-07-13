@@ -240,7 +240,7 @@ footer{
     justify-content: space-around;
     align-items:center;
     max-width: 1105px;
-    height: 156px;
+    height: auto;
     text-align: center;
     text-decoration-line:underline;
     margin-top: 55px;
