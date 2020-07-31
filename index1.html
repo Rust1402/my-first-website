@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+<!--    Пдключаю бібліотеку контвертування xlsx.full.min.js-->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js"
+    ></script>
+    <script type="text/javascript" src="newPrice.json"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+
+<body>
+<input type="file" id="fileUpload" accept=".xls,.xlsx" /><br />
+<button type="button" id="uploadExcel">Конвертувати в JSON</button><br />
+<button type="button" id="saveJSON">Зберегти файл JSON</button>
+<button type="button" id="readJSON">Прочитати файл JSON (Результат дивитись в консолі браузера)</button>
+
+<pre id="jsonData"></pre>
+</body>
+
+<script>
+    var selectedFile;
+    var testJson;
+    document
+        .getElementById("fileUpload")
+        .addEventListener("change", function(event) {
+            selectedFile = event.target.files[0];
+        });
+    document
+        .getElementById("uploadExcel")
+        .addEventListener("click", function() {
+            if (selectedFile) {
+                console.log("hi");
+                var fileReader = new FileReader();
+                fileReader.onload = function(event) {
+                    var data = event.target.result;
+
+                    var workbook = XLSX.read(data, {
+                        type: "binary"
+                    });
+                    workbook.SheetNames.forEach(sheet => {
+                        let rowObject = XLSX.utils.sheet_to_row_object_array(
+                            workbook.Sheets[sheet]
+                        );
+                        let jsonObject = JSON.stringify(rowObject);
+                        document.getElementById("jsonData").innerHTML = jsonObject;
+                        testJson = jsonObject
+                        console.log('ImNewJson', testJson);
+                    });
+                };
+                fileReader.readAsBinaryString(selectedFile);
+            }
+        });
+    document
+        .getElementById("saveJSON")
+        .addEventListener("click", function() {
+            var a = document.createElement("a");
+            var file = new Blob([testJson], {type: 'text/x-json'});
+            a.href = URL.createObjectURL(file);
+            a.download = 'newPrice.json';
+            a.click();
+        })
+
+    document
+        .getElementById("readJSON")
+        .addEventListener("click", function() {
+                // Тут потрібно вказати шлях до фалу JSON   
+                fetch('https://github.com/Rust1402/my-first-website/blob/readme-edits/newPrice.json').then(response =>
+                response.json()).then(obj => console.log(obj))
+                
+        })
+            console.log(fetch);
+</script>
+</html>
